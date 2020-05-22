@@ -30,7 +30,6 @@ import (
 
 	"github.com/opentracing/opentracing-go"
 	namespacepb "go.temporal.io/temporal-proto/namespace"
-	"go.temporal.io/temporal-proto/serviceerror"
 	"go.temporal.io/temporal-proto/workflowservice"
 	"go.temporal.io/temporal/activity"
 	"go.temporal.io/temporal/client"
@@ -70,9 +69,9 @@ func (client *cadenceClient) createNamespace(name string, desc string, owner str
 	}
 	err := client.Register(context.Background(), req)
 	if err != nil {
-		if _, ok := err.(*serviceerror.NamespaceAlreadyExists); !ok {
-			return err
-		}
+		//if _, ok := err.(*serviceerror.NamespaceAlreadyExists); !ok {
+		//	return err
+		//}
 	}
 	return nil
 }
