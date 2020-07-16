@@ -118,7 +118,7 @@ func newWorkflowOptions(id string, executionTimeout time.Duration) client.StartW
 	return client.StartWorkflowOptions{
 		ID:                       id,
 		TaskList:                 taskListName,
-		WorkflowExecutionTimeout: executionTimeout,
+		WorkflowRunTimeout:       executionTimeout,
 		WorkflowTaskTimeout:      decisionTaskTimeout,
 		WorkflowIDReusePolicy:    client.WorkflowIDReusePolicyAllowDuplicate,
 	}
@@ -140,7 +140,7 @@ func newChildWorkflowOptions(namespace string, wfID string) workflow.ChildWorkfl
 		Namespace:                namespace,
 		WorkflowID:               wfID,
 		TaskList:                 taskListName,
-		WorkflowExecutionTimeout: childWorkflowTimeout,
+		WorkflowRunTimeout:       childWorkflowTimeout,
 		WorkflowTaskTimeout:      decisionTaskTimeout,
 		WorkflowIDReusePolicy:    client.WorkflowIDReusePolicyAllowDuplicate,
 	}
