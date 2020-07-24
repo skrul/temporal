@@ -25,7 +25,9 @@
 package elasticsearch
 
 import (
+	"log"
 	"context"
+	"os"
 	"time"
 
 	"github.com/olivere/elastic"
@@ -93,6 +95,9 @@ func NewClient(config *Config) (Client, error) {
 		elastic.SetDecoder(&elastic.NumberDecoder{}), // critical to ensure decode of int64 won't lose precise
 		elastic.SetSniff(false),
 		elastic.SetHealthcheck(false),
+		elastic.SetErrorLog(log.New(os.Stderr, "ELASTIC ", log.LstdFlags)),
+		elastic.SetInfoLog(log.New(os.Stdout, "", log.LstdFlags)),
+		elastic.SetTraceLog(log.New(os.Stderr, "[[ELASTIC]]", 0)),
 	)
 	if err != nil {
 		return nil, err
